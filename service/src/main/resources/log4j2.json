@@ -1,0 +1,37 @@
+{
+  "configuration": {
+    "name": "Default",
+    "appenders": {
+      "Console": {
+        "name": "console-appender",
+        "PatternLayout": {
+          "pattern": "[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"
+        },
+        "JsonLayout": {
+          "compact": "true",
+          "eventEol": "true",
+          "properties": "true"
+        }
+      }
+    },
+    "loggers": {
+      "root": {
+        "level": "info",
+        "appender-ref": {
+          "ref": "console-appender"
+        }
+      },
+      "logger": {
+        "name": "net.apmoller.crb",
+        "level": "info",
+        "additivity": "false",
+        "appender-ref": [
+          {
+            "ref": "console-appender",
+            "level": "info"
+          }
+        ]
+      }
+    }
+  }
+}

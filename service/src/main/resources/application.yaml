@@ -1,0 +1,42 @@
+### For common Spring configs, see: https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+
+server:
+  port: 8080
+spring:
+  datasource:
+    platform: org.hibernate.dialect.H2Dialect
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:file:../../h2db/db;MODE=MSSQLServer;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
+    username: sa
+    password:
+    hikari:
+      connectionTimeout: 300000
+      maximumPoolSize: 60
+  jpa:
+    database: H2
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+  h2:
+    console:
+      enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+logging:
+  config: classpath:log4j2-logtojsonconsole.json
+  level:
+    hibernate: error
+    liquibase: error
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+  api-docs:
+    path: /api-docs
+    enabled: true
