@@ -54,6 +54,6 @@ public class BHBankController {
      */
     @GetMapping(value = "/customer/details", produces = {"application/json"})
     public ResponseEntity<CustomerAccountDetails> getCustomerAccountsDetails(@NotNull @Parameter(in = ParameterIn.QUERY, description = "Customer id", required = true, schema = @Schema()) @Valid @RequestParam(value = "customerId", required = true) Integer customerId) {
-        return new ResponseEntity<>(customerService.getAccountsDetails(customerId), HttpStatus.CREATED);
+        return new ResponseEntity<>(customerService.getAccountsDetails(customerId), HttpStatus.OK);
     }
 }
