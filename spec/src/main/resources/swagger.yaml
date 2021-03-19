@@ -1,0 +1,139 @@
+openapi: 3.0.3
+info:
+  title: BH Bank API
+  description: API to create new account and view transactions for existing customers
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/bank/v1
+paths:
+  /account/create:
+    post:
+      tags:
+        - account
+      summary: Create new account
+      operationId: createNewAccount
+      requestBody:
+        description: New account creation for existing customer
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewAccountRequest'
+      responses:
+        201:
+          description: Created
+          content: {}
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+  /account/details:
+    get:
+      tags:
+        - account
+      summary: Get all accounts' details for a customer
+      operationId: getCustomerAccountsDetails
+      parameters:
+        - name: customerId
+          in: query
+          description: The user name for login
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerAccountDetails'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+        500:
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiError'
+components:
+  schemas:
+    ApiError:
+      type: object
+      properties:
+        message:
+          type: string
+    Customer:
+      type: object
+      properties:
+        customerId:
+          type: integer
+        firstName:
+          type: string
+        lastName:
+          type: string
+    Account:
+      type: object
+      properties:
+        accountId:
+          type: integer
+        accountType:
+          type: string
+          pattern: CURRENT|SAVINGS
+        balance:
+          type: number
+          format: double
+          nullable: true
+    Transaction:
+      type: object
+      properties:
+        txnId:
+          type: integer
+        txnType:
+          type: string
+          pattern: CREDIT|DEBIT
+        amount:
+          type: number
+          format: double
+          nullable: false
+    AccountDetails:
+      allOf:
+        - $ref: '#/components/schemas/Account'
+        - type: object
+          properties:
+            transactions:
+              type: array
+              items:
+                $ref: '#/components/schemas/Transaction'
+    NewAccountRequest:
+      type: object
+      properties:
+        customerId:
+          type: integer
+          description: Customer ID for which new current account is to be created
+        accountType:
+          type: string
+          pattern: CURRENT
+        initialCredit:
+          type: number
+          format: double
+          nullable: true
+    CustomerAccountDetails:
+      allOf:
+        - $ref: '#/components/schemas/Customer'
+        - type: object
+          properties:
+            accounts:
+              type: array
+              items:
+                $ref: '#/components/schemas/AccountDetails'
