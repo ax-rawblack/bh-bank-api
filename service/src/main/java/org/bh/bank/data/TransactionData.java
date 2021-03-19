@@ -15,6 +15,10 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+/**
+ * This is the database model class for Transaction
+ *  @author Anshul Luthra
+ */
 @SuppressWarnings("JpaDataSourceORMInspection")
 @Getter
 @Setter

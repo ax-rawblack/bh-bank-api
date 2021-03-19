@@ -9,6 +9,9 @@ import org.bh.bank.exception.InvalidCustomerException;
 import org.bh.bank.repository.CustomerRepository;
 import org.springframework.stereotype.Component;
 
+/**
+ * The Valid customer aspect to validate existence of customer
+ */
 @Slf4j
 @RequiredArgsConstructor
 @Aspect
@@ -17,12 +20,22 @@ public final class ValidCustomerAspect {
 
     private final CustomerRepository customerRepository;
 
+    /**
+     * Validate.
+     *
+     * @param newAccountRequest the new account request
+     */
     @Before("@annotation(org.bh.bank.validator.ValidCustomer) && args(newAccountRequest)")
     public void validate(NewAccountRequest newAccountRequest) {
         customerRepository.findByCustomerId(newAccountRequest.getCustomerId())
                 .orElseThrow(() -> new InvalidCustomerException("Customer in the request does not exists"));
     }
 
+    /**
+     * Validate.
+     *
+     * @param customerId the customer id
+     */
     @Before("@annotation(org.bh.bank.validator.ValidCustomer) && args(customerId)")
     public void validate(int customerId) {
         customerRepository.findByCustomerId(customerId)

@@ -16,11 +16,20 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.stream.Collectors;
 
+/**
+ * The type BH Bank controller advice for exceptions
+ */
 @Slf4j
 @ControllerAdvice
 @Component
 public class BHBankControllerAdvice {
 
+    /**
+     * Handle api error.
+     *
+     * @param exception the exception
+     * @return the api error
+     */
     @ExceptionHandler
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -29,6 +38,12 @@ public class BHBankControllerAdvice {
         return new ApiError().message(exception.getMessage());
     }
 
+    /**
+     * Handle api error.
+     *
+     * @param exception the exception
+     * @return the api error
+     */
     @ExceptionHandler
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -37,6 +52,12 @@ public class BHBankControllerAdvice {
         return new ApiError().message(exception.getCause().getMessage());
     }
 
+    /**
+     * Handle api error.
+     *
+     * @param exception the exception
+     * @return the api error
+     */
     @ExceptionHandler
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -46,6 +67,12 @@ public class BHBankControllerAdvice {
         return new ApiError().message("Invalid "+errors);
     }
 
+    /**
+     * Handle api error.
+     *
+     * @param exception the exception
+     * @return the api error
+     */
     @ExceptionHandler
     @ResponseBody
     @ResponseStatus(HttpStatus.BAD_REQUEST)

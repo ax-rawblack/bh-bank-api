@@ -8,6 +8,9 @@ import org.bh.bank.exception.InvalidAccountException;
 import org.bh.bank.repository.AccountRepository;
 import org.springframework.stereotype.Component;
 
+/**
+ * The type Valid account aspect to validate existence of account
+ */
 @Slf4j
 @RequiredArgsConstructor
 @Aspect
@@ -16,6 +19,13 @@ public final class ValidAccountAspect {
 
     private final AccountRepository accountRepository;
 
+    /**
+     * Validate.
+     *
+     * @param accountId       the account id
+     * @param transactionType the transaction type
+     * @param amount          the amount
+     */
     @Before("@annotation(org.bh.bank.validator.ValidAccount) && args(accountId, transactionType, amount)")
     public void validate(int accountId, String transactionType, double amount) {
         accountRepository.findByAccountId(accountId)

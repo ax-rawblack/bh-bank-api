@@ -8,9 +8,18 @@ import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
+/**
+ * This is mapper class for Customer
+ */
 @Component
 public class CustomerMapper {
 
+    /**
+     * Map customer data customer account details.
+     *
+     * @param customerData the customer data
+     * @return the customer account details
+     */
     public CustomerAccountDetails mapCustomerData(CustomerData customerData) {
 
         CustomerAccountDetails customerAccountDetails = new CustomerAccountDetails();

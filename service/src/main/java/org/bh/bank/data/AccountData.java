@@ -20,6 +20,10 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is the database model class for Account
+ * @author Anshul Luthra
+ */
 @SuppressWarnings("JpaDataSourceORMInspection")
 @Getter
 @Setter

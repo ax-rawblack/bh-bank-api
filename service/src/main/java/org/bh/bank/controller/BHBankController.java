@@ -21,6 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+/**
+ * The BH Bank REST Controller
+ * @author Anshul Luthra
+ */
 @RestController
 @Validated
 @RequestMapping("bank/v1")
@@ -30,12 +34,24 @@ public class BHBankController {
     private final AccountService accountService;
     private final CustomerService customerService;
 
+    /**
+     * Create new account for existing customer (POST)
+     *
+     * @param newAccountRequest the new account request
+     * @return the response entity
+     */
     @PostMapping(value = "/account/create", produces = {"application/json"})
     public ResponseEntity<Void> createNewAccount(@Parameter(in = ParameterIn.DEFAULT, description = "New account creation for existing customer", schema = @Schema()) @Valid @RequestBody NewAccountRequest newAccountRequest) {
         accountService.createNewAccount(newAccountRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    /**
+     * Gets customer accounts details for existing customer (GET)
+     *
+     * @param customerId the customer id
+     * @return the customer accounts details
+     */
     @GetMapping(value = "/customer/details", produces = {"application/json"})
     public ResponseEntity<CustomerAccountDetails> getCustomerAccountsDetails(@NotNull @Parameter(in = ParameterIn.QUERY, description = "Customer id", required = true, schema = @Schema()) @Valid @RequestParam(value = "customerId", required = true) Integer customerId) {
         return new ResponseEntity<>(customerService.getAccountsDetails(customerId), HttpStatus.CREATED);

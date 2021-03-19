@@ -11,6 +11,9 @@ import org.bh.bank.validator.ValidCustomer;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * The type Account service implementation
+ */
 @Service
 @RequiredArgsConstructor
 public class AccountServiceImpl implements AccountService {
@@ -26,6 +29,9 @@ public class AccountServiceImpl implements AccountService {
         AccountData accountDataResult = accountRepository.save(accountMapper.mapNewAccountRequest(newAccountRequest));
         Double initialCredit = newAccountRequest.getInitialCredit();
 
+        /**
+         * InitialCredit check for transaction
+         */
         if (initialCredit != null && initialCredit > NumberUtils.DOUBLE_ZERO) {
             transactionService.performNewTransaction(accountDataResult.getAccountId(), TransactionType.CREDIT.toString(), initialCredit);
             accountDataResult.setBalance(accountDataResult.getBalance() + initialCredit);

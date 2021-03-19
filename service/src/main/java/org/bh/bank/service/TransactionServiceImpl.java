@@ -6,6 +6,9 @@ import org.bh.bank.repository.TransactionRepository;
 import org.bh.bank.validator.ValidAccount;
 import org.springframework.stereotype.Service;
 
+/**
+ * The type Transaction service implementation
+ */
 @Service
 @RequiredArgsConstructor
 public class TransactionServiceImpl implements TransactionService {
