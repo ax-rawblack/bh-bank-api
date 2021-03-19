@@ -34,19 +34,19 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiError'
-  /account/details:
+  /customer/details:
     get:
       tags:
-        - account
+        - customer
       summary: Get all accounts' details for a customer
       operationId: getCustomerAccountsDetails
       parameters:
         - name: customerId
           in: query
-          description: The user name for login
+          description: Customer id
           required: true
           schema:
-            type: string
+            type: integer
       responses:
         200:
           description: OK
@@ -105,7 +105,7 @@ components:
         amount:
           type: number
           format: double
-          nullable: false
+          minimum: 0.0
     AccountDetails:
       allOf:
         - $ref: '#/components/schemas/Account'
@@ -127,7 +127,7 @@ components:
         initialCredit:
           type: number
           format: double
-          nullable: true
+          minimum: 0.0
     CustomerAccountDetails:
       allOf:
         - $ref: '#/components/schemas/Customer'
