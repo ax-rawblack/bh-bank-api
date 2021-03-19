@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - logicalFilePath: "db.changelog-D001-create-schema-bh.yaml"
+  - changeSet:
+      id: D001
+      author: Anshul
+      runAlways: false
+      failOnError: true
+      runOnChange: false
+      changes:
+      - sql:
+         splitStatements: true
+         sql: create schema if not exists bh

@@ -1,0 +1,30 @@
+databaseChangeLog:
+  - logicalFilePath: "db.changelog-D002-create-table-customer.yaml"
+  - changeSet:
+      id: D002
+      author: Anshul
+      runAlways: false
+      failOnError: true
+      runOnChange: false
+      changes:
+      - createTable:
+          tableName: CUSTOMER
+          schemaName: bh
+          columns:
+            - column:
+                name: CUSTOMER_ID
+                type: bigint
+                autoIncrement: true
+                constraints:
+                  primaryKey: true
+                  nullable: false
+            - column:
+                name: FIRST_NAME
+                type: varchar(50)
+            - column:
+                name: LAST_NAME
+                type: varchar(50)
+            - column:
+                name: CREATED_DTTM
+                type: timestamp
+                defaultValueComputed: "CURRENT_TIMESTAMP"

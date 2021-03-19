@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - logicalFilePath: "db.changelog-T001-insert-customers.yaml"
+  - changeSet:
+      id: T001
+      author: Anshul
+      changes:
+        - sqlFile:
+            encoding: utf8
+            path: ../sqlscripts/0001_INSERT_CUSTOMERS.sql
+            relativeToChangelogFile: true
+            splitStatements: true
+            stripComments: true

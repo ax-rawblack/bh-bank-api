@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - logicalFilePath: "db.changelog-D004-create-table-transaction.yaml"
+  - changeSet:
+      id: D004
+      author: Anshul
+      runAlways: false
+      failOnError: true
+      runOnChange: false
+      changes:
+      - createTable:
+          tableName: TRANSACTION
+          schemaName: bh
+          columns:
+            - column:
+                name: TRANSACTION_ID
+                type: bigint
+                autoIncrement: true
+                constraints:
+                  primaryKey: true
+                  nullable: false
+            - column:
+                name: ACCOUNT_ID
+                type: bigint
+                constraints:
+                  nullable: false
+                  foreignKeyName: fk_account
+                  onDelete: CASCADE
+                  references: bh.ACCOUNT(ACCOUNT_ID)
+            - column:
+                name: TRANSACTION_TYPE
+                type: varchar(20)
+            - column:
+                name: AMOUNT
+                type: double
+            - column:
+                name: CREATED_DTTM
+                type: timestamp
+                defaultValueComputed: "CURRENT_TIMESTAMP"

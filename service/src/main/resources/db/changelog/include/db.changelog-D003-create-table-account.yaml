@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - logicalFilePath: "db.changelog-D003-create-table-account.yaml"
+  - changeSet:
+      id: D003
+      author: Anshul
+      runAlways: false
+      failOnError: true
+      runOnChange: false
+      changes:
+      - createTable:
+          tableName: ACCOUNT
+          schemaName: bh
+          columns:
+            - column:
+                name: ACCOUNT_ID
+                type: bigint
+                autoIncrement: true
+                constraints:
+                  primaryKey: true
+                  nullable: false
+            - column:
+                name: CUSTOMER_ID
+                type: bigint
+                constraints:
+                  nullable: false
+                  foreignKeyName: fk_customer
+                  onDelete: CASCADE
+                  references: bh.CUSTOMER(CUSTOMER_ID)
+            - column:
+                name: ACCOUNT_TYPE
+                type: varchar(20)
+            - column:
+                name: BALANCE
+                type: double
+            - column:
+                name: CREATED_DTTM
+                type: timestamp
+                defaultValueComputed: "CURRENT_TIMESTAMP"
