@@ -43,3 +43,4 @@ The application is developed with Java 11 and Spring Boot framework using Maven 
 - Open http://localhost:8080/swagger-ui.html in your web browser and use 'Try it Out' to test the any endpoint providing necessary inputs
 - API docs are available at http://localhost:8080/api-docs
 - H2 db can be visualised at http://localhost:8080/h2-console using db details from application.yaml file in the project
+- Two customers with customerId 1 and 2 are already added to the CUSTOMER table to test application. If required, more can be updated in the liquibase insert script.
